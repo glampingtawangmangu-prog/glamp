@@ -46,7 +46,7 @@
 <div class="sticky-header py-4 shadow-sm">
     <div class="container mx-auto px-4">
         <input id="searchInput" type="text"
-            placeholder="Cari unit glamping..."
+            placeholder="Cari nama unit / fasilitas (wifi, private pool...)"
             class="w-full max-w-md px-5 py-2 rounded-full border focus:ring-2 focus:ring-green-500 outline-none">
     </div>
 </div>
@@ -66,25 +66,19 @@
             &times;
         </button>
 
-        <!-- SLIDER -->
         <div class="swiper mySwiper mb-4">
             <div class="swiper-wrapper" id="modalSlider"></div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
 
-        <h2 id="modalTitle"
-            class="text-xl font-bold text-green-700 uppercase"></h2>
+        <h2 id="modalTitle" class="text-xl font-bold text-green-700 uppercase"></h2>
+        <p id="modalPrice" class="text-lg font-black mb-2"></p>
 
-        <p id="modalPrice"
-           class="text-lg font-black mb-2"></p>
-
-        <!-- HARGA HARI -->
         <div id="modalHargaHari"
              class="flex justify-between text-xs font-bold bg-green-50 p-3 rounded-lg mb-4">
         </div>
 
-        <!-- FASILITAS -->
         <div class="bg-gray-50 p-4 rounded-2xl mb-6">
             <h3 class="text-[10px] font-black text-gray-400 uppercase mb-2">
                 Fasilitas
@@ -93,7 +87,6 @@
                  class="grid grid-cols-2 gap-1 text-sm text-gray-600"></div>
         </div>
 
-        <!-- WA -->
         <a id="modalWA"
            class="block bg-green-600 text-white text-center py-3 rounded-xl font-bold hover:bg-green-700">
             <i class="fab fa-whatsapp mr-2"></i>BOOKING VIA WHATSAPP
@@ -106,36 +99,6 @@
 <script>
 /* ================= DATA ================= */
 const daftarGlamping = [
-    {
-        id: 1,
-        nama: "Glamping Deluxe A1",
-        harga: 500000,
-        fasilitas: [
-            "Parkir luas",
-            "Kopi shop",
-            "Halaman rumput",
-            "Kursi santai",
-            "Tenda & Free grill",
-            "Smart TV & Wifi",
-            "Netflix & Welcome drink",
-            "Bed & Air hangat",
-            "Pengering rambut",
-            "Dapur mini",
-            "🏊 Privat pool"
-        ],
-        foto: [
-            "https://images.unsplash.com/photo-1493246507139-91e8bef99c02?w=800",
-            "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800",
-            "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800"
-        ],
-        hargaHari: {
-            minggu_kamis: 500,
-            jumat: 600,
-            sabtu: 800
-        },
-        whatsapp: "62895415842299"
-    },
-
     {
         id: 1,
         nama: "Glamping Deluxe A1",
@@ -185,7 +148,67 @@ const daftarGlamping = [
             sabtu: 900
         },
         whatsapp: "62895415842299"
+    },
+    
+    {
+        id: 1,
+        nama: "Glamping Deluxe A1",
+        harga: 500000,
+        fasilitas: [
+            "Parkir luas",
+            "Kopi shop",
+            "Halaman rumput",
+            "Kursi santai",
+            "Tenda & Free grill",
+            "Smart TV & Wifi",
+            "Netflix & Welcome drink",
+            "Bed & Air hangat",
+            "Pengering rambut",
+            "Dapur mini",
+            "🏊 Privat pool"
+        ],
+        foto: [
+            "https://images.unsplash.com/photo-1493246507139-91e8bef99c02?w=800",
+            "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800",
+            "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800"
+        ],
+        hargaHari: {
+            minggu_kamis: 500,
+            jumat: 600,
+            sabtu: 800
+        },
+        whatsapp: "62895415842299"
+    },
+    {
+        id: 1,
+        nama: "Glamping Deluxe A1",
+        harga: 500000,
+        fasilitas: [
+            "Parkir luas",
+            "Kopi shop",
+            "Halaman rumput",
+            "Kursi santai",
+            "Tenda & Free grill",
+            "Smart TV & Wifi",
+            "Netflix & Welcome drink",
+            "Bed & Air hangat",
+            "Pengering rambut",
+            "Dapur mini",
+            "🏊 Privat pool"
+        ],
+        foto: [
+            "https://images.unsplash.com/photo-1493246507139-91e8bef99c02?w=800",
+            "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800",
+            "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800"
+        ],
+        hargaHari: {
+            minggu_kamis: 500,
+            jumat: 600,
+            sabtu: 800
+        },
+        whatsapp: "62895415842299"
     }
+    
 ];
 
 /* ================= GRID ================= */
@@ -193,6 +216,13 @@ const grid = document.getElementById("glampingGrid");
 
 function renderKatalog(data) {
     grid.innerHTML = "";
+    if (data.length === 0) {
+        grid.innerHTML = `
+            <p class="col-span-full text-center text-gray-400">
+                Tidak ada unit yang cocok
+            </p>`;
+        return;
+    }
     data.forEach(item => {
         grid.innerHTML += `
             <div onclick="openPopup(${item.id})"
@@ -219,38 +249,29 @@ function openPopup(id) {
     document.getElementById("modalPrice").innerText =
         "Rp " + item.harga.toLocaleString("id-ID") + " / malam";
 
-    // harga per hari
     document.getElementById("modalHargaHari").innerHTML = `
         <span>MING–KAM: ${item.hargaHari.minggu_kamis}K</span>
         <span>JUMAT: ${item.hargaHari.jumat}K</span>
         <span>SABTU: ${item.hargaHari.sabtu}K</span>
     `;
 
-    // fasilitas
     document.getElementById("modalFasilitas").innerHTML =
         item.fasilitas.map(f => `<p>✅ ${f}</p>`).join("");
 
-    // WA
     document.getElementById("modalWA").href =
         `https://wa.me/${item.whatsapp}?text=Halo, saya ingin booking ${encodeURIComponent(item.nama)}`;
 
-    // slider
     const slider = document.getElementById("modalSlider");
     slider.innerHTML = "";
     item.foto.forEach(img => {
-        slider.innerHTML += `
-            <div class="swiper-slide"><img src="${img}"></div>
-        `;
+        slider.innerHTML += `<div class="swiper-slide"><img src="${img}"></div>`;
     });
 
     document.getElementById("detailModal").style.display = "flex";
     document.body.style.overflow = "hidden";
 
     swiper = new Swiper(".mySwiper", {
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev"
-        }
+        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }
     });
 }
 
@@ -259,15 +280,24 @@ function closePopup() {
     document.body.style.overflow = "auto";
 }
 
-/* ================= SEARCH ================= */
+/* ================= SEARCH (NAMA + FASILITAS) ================= */
 document.getElementById("searchInput").addEventListener("keyup", function () {
-    const val = this.value.toLowerCase();
-    renderKatalog(
-        daftarGlamping.filter(i => i.nama.toLowerCase().includes(val))
-    );
+    const keyword = this.value.toLowerCase().trim();
+
+    const filtered = daftarGlamping.filter(item => {
+        const matchNama = item.nama.toLowerCase().includes(keyword);
+        const matchFasilitas = item.fasilitas.some(f =>
+            f.toLowerCase().includes(keyword)
+        );
+        return matchNama || matchFasilitas;
+    });
+
+    renderKatalog(filtered);
 });
 
+/* INIT */
 renderKatalog(daftarGlamping);
 </script>
+
 </body>
 </html>
