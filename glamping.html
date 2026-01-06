@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>100 Katalog Glamping Tawangmangu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        html { scroll-behavior: smooth; }
+        /* Style Modal Persis Halaman Depan */
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; align-items: center; justify-content: center; padding: 15px; }
+        .swiper { width: 100%; height: 250px; border-radius: 15px; margin-bottom: 15px; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .sticky-header { position: sticky; top: 0; z-index: 50; background: white; border-bottom: 1px solid #eee; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-green-700 text-white py-10 text-center">
+        <h1 class="text-3xl font-black uppercase tracking-tighter">Katalog 100 Unit Glamping</h1>
+        <p class="opacity-80">Klik unit untuk detail foto dan fasilitas</p>
+    </header>
+
+    <div class="sticky-header py-4 shadow-sm">
+        <div class="container mx-auto px-4 flex justify-between items-center gap-4">
+            <a href="GLAMP.html" class="text-green-700 font-bold"><i class="fas fa-arrow-left"></i> Kembali</a>
+            <input type="text" id="searchInput" placeholder="Cari unit glamping..." 
+                class="w-full max-w-md px-5 py-2 rounded-full border border-gray-300 focus:ring-2 focus:ring-green-500 outline-none">
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-10">
+        <div id="glampingGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            </div>
+    </main>
+
+    <div id="detailModal" class="modal" role="dialog" aria-modal="true">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative shadow-2xl">
+            <button onclick="closePopup()" class="absolute top-4 right-4 text-3xl font-bold z-10 text-gray-400 hover:text-black">&times;</button>
+            
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper" id="modalSliderContent">
+                    </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+
+            <h2 id="modalTitle" class="text-xl font-bold text-green-700 mb-1 uppercase"></h2>
+            <p id="modalPrice" class="text-lg font-bold text-gray-900 mb-4"></p>
+            
+            <div class="bg-gray-50 p-4 rounded-2xl mb-6">
+                <h3 class="text-[10px] font-black text-gray-400 uppercase mb-2 tracking-widest">Fasilitas Unit:</h3>
+                <p id="modalFasilitas" class="text-sm text-gray-600 leading-relaxed"></p>
+            </div>
+
+            <a id="modalWA" href="#" class="block bg-green-600 text-white text-center py-3 rounded-xl font-bold hover:bg-green-700 transition">
+                <i class="fab fa-whatsapp mr-2"></i>HUBUNGI ADMIN
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // DATA KATALOG (Anda tinggal edit/tambah di sini sampai 100)
+        const daftarGlamping = [
+            { 
+                id: 1, 
+                nama: "Glamping Deluxe A1", 
+                harga: "500.000", 
+                fasilitas: "Kamar Mandi Dalam, Air Hangat, Wifi, Smart TV, Privat Terrace, Sarapan 2 Pax.",
+                foto: [
+                    "https://images.unsplash.com/photo-1493246507139-91e8bef99c02?w=600",
+                    "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600"
+                ]
+            },
+            { 
+                id: 2, 
+                nama: "Glamping Suite B2", 
+                harga: "750.000", 
+                fasilitas: "Private Pool, Bathtub, Netflix, Mini Kitchen, BBQ Set, King Bed.",
+                foto: [
+                    "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600",
+                    "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600"
+                ]
+            }
+        ];
+
+        // Otomatisasi sisa data contoh sampai 100
+        for (let i = 3; i <= 100; i++) {
+            daftarGlamping.push({
+                id: i,
+                nama: "Glamping Unit " + i,
+                harga: "500.000",
+                fasilitas: "Wifi, Kamar Mandi Dalam, Air Hangat, Bed Premium, View Pegunungan.",
+                foto: ["https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=600"]
+            });
+        }
+
+        const grid = document.getElementById('glampingGrid');
+        const swiperModal = new Swiper(".mySwiper", {
+            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+        });
+
+        // Tampilkan Kartu
+        function renderKatalog(data) {
+            grid.innerHTML = "";
+            data.forEach(item => {
+                grid.innerHTML += `
+                    <div onclick="openPopup(${item.id})" class="bg-white rounded-2xl shadow-sm border p-3 cursor-pointer hover:shadow-md transition">
+                        <img src="${item.foto[0]}" class="h-40 w-full object-cover rounded-xl mb-3">
+                        <h4 class="font-bold text-gray-700 uppercase text-xs">${item.nama}</h4>
+                        <p class="text-green-600 font-bold text-sm">Rp ${item.harga}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Fungsi Buka Popup
+        function openPopup(id) {
+            const item = daftarGlamping.find(g => g.id === id);
+            if (!item) return;
+
+            document.getElementById('modalTitle').innerText = item.nama;
+            document.getElementById('modalPrice').innerText = "Rp " + item.harga + " / Malam";
+            document.getElementById('modalFasilitas').innerText = item.fasilitas;
+            document.getElementById('modalWA').href = `https://wa.me/62895415842299?text=Halo, saya ingin tanya unit ${item.nama}`;
+
+            // Isi Foto Slider
+            const sliderContent = document.getElementById('modalSliderContent');
+            sliderContent.innerHTML = "";
+            item.foto.forEach(imgUrl => {
+                sliderContent.innerHTML += `<div class="swiper-slide"><img src="${imgUrl}"></div>`;
+            });
+
+            document.getElementById('detailModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            swiperModal.update(); // Update Swiper agar tidak error saat modal terbuka
+        }
+
+        function closePopup() {
+            document.getElementById('detailModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Search
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const val = this.value.toLowerCase();
+            const filtered = daftarGlamping.filter(i => i.nama.toLowerCase().includes(val));
+            renderKatalog(filtered);
+        });
+
+        renderKatalog(daftarGlamping);
+
+        // Tutup modal jika klik di luar box
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('detailModal')) closePopup();
+        }
+    </script>
+</body>
+</html>

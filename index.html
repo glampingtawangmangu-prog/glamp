@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Katalog Glamping Tawangmangu — paket glamping, jeep adventure, BBQ, dan kambing guling." />
+    <title>Katalog Glamping Tawangmangu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        html { scroll-behavior: smooth; }
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; align-items: center; justify-content: center; padding: 15px; }
+        .hero-section { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; }
+        .swiper { width: 100%; height: 250px; border-radius: 15px; margin-bottom: 15px; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; } /* object-fit diperbaiki */
+        .swiper-button-next, .swiper-button-prev { color: #fff; transform: scale(0.6); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-black text-green-700">GLAMPING TAWANGMANGU</h1>
+            <div class="hidden md:flex space-x-6 text-sm font-bold uppercase">
+                <a href="#katalog" class="hover:text-green-600">Katalog</a>
+                <a href="#galeri" class="hover:text-green-600">Galeri</a>
+                <a href="#kontak" class="hover:text-green-600">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section h-[60vh] flex items-center justify-center text-center text-white pt-16" role="banner">
+        <div class="px-4">
+            <h2 class="text-4xl md:text-6xl font-black uppercase mb-2">Staycation Tawangmangu</h2>
+            <p class="text-lg opacity-90 italic">Kembali ke Alam dengan Kenyamanan Maksimal</p>
+        </div>
+    </header>
+
+    <main>
+    <section id="katalog" class="py-16 container mx-auto px-4">
+        <div class="text-center mb-10">
+            <h3 class="text-3xl font-bold border-b-4 border-green-600 inline-block pb-2">KATALOG LAYANAN</h3>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div onclick="openModal('pop-glamping')" class="bg-white rounded-2xl shadow hover:shadow-xl transition cursor-pointer overflow-hidden border" role="button" tabindex="0" aria-pressed="false">
+                <img src="https://images.unsplash.com/photo-1493246507139-91e8bef99c02?w=500" alt="Tenda glamping" class="h-48 w-full object-cover">
+                <div class="p-4 text-center">
+                    <h4 class="font-bold uppercase text-gray-700">Paket Glamping</h4>
+                    <p class="text-green-600 font-bold">Rp 500.000</p>
+                </div>
+            </div>
+            <div onclick="openModal('pop-jeep')" class="bg-white rounded-2xl shadow hover:shadow-xl transition cursor-pointer overflow-hidden border" role="button" tabindex="0">
+                <img src="https://images.unsplash.com/photo-1533560223523-2fdd0609cc5b?w=500" alt="Jeep adventure" class="h-48 w-full object-cover">
+                <div class="p-4 text-center">
+                    <h4 class="font-bold uppercase text-gray-700">Jeep Adventure</h4>
+                    <p class="text-green-600 font-bold">Mulai 350rb</p>
+                </div>
+            </div>
+            <div onclick="openModal('pop-bbq')" class="bg-white rounded-2xl shadow hover:shadow-xl transition cursor-pointer overflow-hidden border" role="button" tabindex="0">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500" alt="BBQ catering" class="h-48 w-full object-cover">
+                <div class="p-4 text-center">
+                    <h4 class="font-bold uppercase text-gray-700">Catering & BBQ</h4>
+                    <p class="text-green-600 font-bold">Lengkap</p>
+                </div>
+            </div>
+            <div onclick="openModal('pop-kambing')" class="bg-white rounded-2xl shadow hover:shadow-xl transition cursor-pointer overflow-hidden border" role="button" tabindex="0">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500" alt="Kambing guling" class="h-48 w-full object-cover">
+                <div class="p-4 text-center">
+                    <h4 class="font-bold uppercase text-gray-700">Kambing Guling</h4>
+                    <p class="text-green-600 font-bold">Spesial Menu</p>
+                </div>
+            </div>
+        </div>
+<div class="text-center mt-12 mb-16">
+    <a href="katalog-100-glamping.html" target="_blank" class="inline-block bg-green-600 text-white px-10 py-4 rounded-full font-black uppercase tracking-widest hover:bg-green-700 transition shadow-xl transform hover:scale-105">
+        Lihat Semua Unit Glamping <i class="fas fa-external-link-alt ml-2"></i>
+    </a>
+    <p class="text-gray-400 text-xs mt-4 italic">Klik untuk mengeksplorasi seluruh pilihan tenda di tab baru</p>
+</div>
+    </section>
+
+    <section id="galeri" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold text-center mb-8 uppercase">Galeri Foto & Video</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=400" alt="Pemandangan 1" class="rounded-lg shadow h-40 w-full object-cover">
+                <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400" alt="Pemandangan 2" class="rounded-lg shadow h-40 w-full object-cover">
+                <img src="https://images.unsplash.com/photo-1521401830884-6c03c1c87ebb?w=400" alt="Pemandangan 3" class="rounded-lg shadow h-40 w-full object-cover">
+                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400" alt="Pemandangan 4" class="rounded-lg shadow h-40 w-full object-cover">
+            </div>
+            <div class="max-w-3xl mx-auto aspect-video bg-black rounded-2xl shadow-2xl overflow-hidden">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen title="Video promosi"></iframe>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Modal contoh (semua modal memiliki struktur sama dan id berbeda) -->
+    <div id="pop-glamping" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative" tabindex="-1">
+            <button onclick="closeModal('pop-glamping')" aria-label="Tutup" class="absolute top-4 right-4 text-3xl font-bold z-10 text-gray-400">&times;</button>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1493246507139-91e8bef99c02?w=600" alt="Glamping 1"></div>
+                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600" alt="Glamping 2"></div>
+                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600" alt="Glamping 3"></div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+
+            <h2 class="text-xl font-bold text-green-700">PAKET GLAMPING</h2>
+            <p class="text-2xl font-black mb-4">Rp 500.000,00</p>
+            <div class="grid grid-cols-2 gap-2 text-[12px] bg-gray-50 p-4 rounded-xl mb-4">
+                <p>✅ Parkir luas</p><p>✅ Kopi shop</p>
+                <p>✅ Halaman rumput</p><p>✅ Kursi santai</p>
+                <p>✅ Tenda & Free grill</p><p>✅ Smart tv & Wifi</p>
+                <p>✅ Netflix & Welcome drink</p><p>✅ Bed & Air hangat</p>
+                <p>✅ Pengering rambut</p><p>✅ Dapur mini</p>
+                <p>✅ 🏊 Privat pool</p>
+            </div>
+            <div class="flex justify-between text-xs font-bold bg-green-50 p-3 rounded-lg mb-4">
+                <span>MING-KAM: 500</span><span>JUM'AT: 600</span><span>SABTU: 800</span>
+            </div>
+            <p class="text-[10px] text-red-500 italic mb-4">* Extra bed +100</p>
+            <a href="https://wa.me/62895415842299" class="block bg-green-600 text-white text-center py-3 rounded-xl font-bold shadow-lg">BOOKING VIA WHATSAPP</a>
+        </div>
+    </div>
+
+    <!-- Modal lain (ringkasan, struktur sama seperti di atas) -->
+    <div id="pop-jeep" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative" tabindex="-1">
+            <button onclick="closeModal('pop-jeep')" aria-label="Tutup" class="absolute top-4 right-4 text-3xl font-bold z-10 text-gray-400">&times;</button>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1533560223523-2fdd0609cc5b?w=600" alt="Jeep 1"></div>
+                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1539734215737-23a6117326c3?w=600" alt="Jeep 2"></div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            <h2 class="text-xl font-bold text-green-700 mb-2 uppercase">Jeep Adventure</h2>
+            <p class="text-gray-600 text-sm mb-6">Jelajah seru rute kebun teh dan hutan Tawangmangu dengan armada Jeep 4x4.</p>
+            <a href="https://wa.me/62895415842299" class="block bg-green-600 text-white text-center py-3 rounded-xl font-bold">CEK RUTE JEEP</a>
+        </div>
+    </div>
+
+    <div id="pop-bbq" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative" tabindex="-1">
+            <button onclick="closeModal('pop-bbq')" aria-label="Tutup" class="absolute top-4 right-4 text-3xl font-bold z-10 text-gray-400">&times;</button>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600" alt="BBQ 1"></div>
+                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=600" alt="BBQ 2"></div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            <h2 class="text-xl font-bold text-green-700 mb-2 uppercase">Catering & Paket BBQ</h2>
+            <p class="text-gray-600 text-sm mb-6">Paket makan bersama praktis dan higienis untuk keluarga atau rombongan.</p>
+            <a href="https://wa.me/62895415842299" class="block bg-green-600 text-white text-center py-3 rounded-xl font-bold">CEK MENU BBQ</a>
+        </div>
+    </div>
+
+    <div id="pop-kambing" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative" tabindex="-1">
+            <button onclick="closeModal('pop-kambing')" aria-label="Tutup" class="absolute top-4 right-4 text-3xl font-bold z-10 text-gray-400">&times;</button>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600" alt="Kambing 1"></div>
+                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1514516322520-57c40c8f1c23?w=600" alt="Kambing 2"></div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            <h2 class="text-xl font-bold text-green-700 mb-2 uppercase">Menu Kambing Guling</h2>
+            <p class="text-gray-600 text-sm mb-6">Pilihan menu mewah untuk acara spesial Anda di Glamping Tawangmangu.</p>
+            <a href="https://wa.me/62895415842299" class="block bg-green-600 text-white text-center py-3 rounded-xl font-bold">PESAN SEKARANG</a>
+        </div>
+    </div>
+
+    <footer id="kontak" class="bg-zinc-900 text-white py-12" role="contentinfo">
+        <div class="container mx-auto px-4 text-center">
+            <h4 class="text-xl font-black mb-6 uppercase tracking-widest">Glamping Tawangmangu</h4>
+            
+            <div class="flex justify-center space-x-8 mb-10 text-3xl">
+                <a href="https://instagram.com/username_anda" class="hover:text-pink-500" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://tiktok.com/@username_anda" class="hover:text-gray-400" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/62895415842299" class="hover:text-green-500" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+
+            <div class="text-xs text-gray-500 border-t border-zinc-800 pt-6">
+                <p>&copy; 2026 GLAMPING TAWANGMANGU. WhatsApp: 0895-4158-42299</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Inisialisasi semua slider (per modal)
+        document.querySelectorAll('.mySwiper').forEach(container => {
+            new Swiper(container, {
+                loop: true,
+                navigation: {
+                    nextEl: container.querySelector('.swiper-button-next'),
+                    prevEl: container.querySelector('.swiper-button-prev'),
+                },
+            });
+        });
+
+        // simple modal management with basic accessibility/focus handling
+        let lastFocusedElement = null;
+
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (!modal) return;
+            lastFocusedElement = document.activeElement;
+            modal.style.display = "flex";
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = "hidden";
+
+            // focus first focusable in modal or modal container itself
+            const focusable = modal.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+            if (focusable) focusable.focus();
+            else modal.querySelector('[tabindex="-1"]')?.focus();
+
+            // trigger resize so slider recalculates size
+            window.dispatchEvent(new Event('resize'));
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (!modal) return;
+            modal.style.display = "none";
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = "auto";
+            if (lastFocusedElement) lastFocusedElement.focus();
+        }
+
+        // Klik di luar modal untuk tutup
+        window.addEventListener('click', function(e) {
+            if (e.target && e.target.classList && e.target.classList.contains('modal')) {
+                e.target.style.display = "none";
+                e.target.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = "auto";
+            }
+        });
+
+        // Tutup dengan ESC
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' || e.key === 'Esc') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    if (modal.style.display === 'flex') {
+                        modal.style.display = 'none';
+                        modal.setAttribute('aria-hidden', 'true');
+                        document.body.style.overflow = "auto";
+                    }
+                });
+                if (lastFocusedElement) lastFocusedElement.focus();
+            }
+        });
+    </script>
+</body>
+</html>
